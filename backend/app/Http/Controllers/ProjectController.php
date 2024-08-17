@@ -9,8 +9,8 @@ use App\Models\Project;
 
 class ProjectController extends Controller
 {
-    public function indext(Request $request) {
-        return ProjectResource::collection($request->user()->project);
+    public function index(Request $request) {
+        return ProjectResource::collection($request->user()->projects);
     }
 
     public function store(ProjectCreateRequest $request) {
@@ -40,7 +40,7 @@ class ProjectController extends Controller
     public function destroy(Project $project, Request $request) {
         abort_if($project->user_id !== $request->user()->id, 403, 'You are not allowed to delete the project');
 
-        $project->delet();
+        $project->delete();
 
         return response()->json([
             'message' => 'Prject deleted Successfully'

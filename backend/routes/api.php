@@ -8,7 +8,7 @@ use App\Http\Controllers\TicketController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
+Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/me', fn(Request $request) => $request->user());
 
     Route::post('/verify-email/{id}/{hash}', VerifyEmailController::class)
@@ -21,12 +21,13 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     Route::post('/project', [ProjectController::class, 'store']);
     Route::get('/project/{project}', [ProjectController::class, 'show']);
     Route::put('/project/{project}', [ProjectController::class, 'update']);
+    Route::delete('/project/{project}', [ProjectController::class, 'destroy']);
 
     // Route::get('/project/{project}/boards', [BoardController::class, 'index']);
     Route::post('/board', [BoardController::class, 'store']);
     // Route::get('/board/{board}', [BoardController::class, 'show']);
     Route::put('/board/{board}', [BoardController::class, 'update']);
-    Route::delet('/board/{board}', [BoardController::class, 'destroy']);
+    Route::delete('/board/{board}', [BoardController::class, 'destroy']);
 
     Route::post('/ticket', [TicketController::class, 'store']);
     Route::get('/ticket/{ticket}', [TicketController::class, 'show']);

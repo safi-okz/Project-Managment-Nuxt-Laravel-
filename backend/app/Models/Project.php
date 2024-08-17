@@ -20,7 +20,7 @@ class Project extends Model
             return $this->belongsTo(User::class);
     }
 
-    public function board() : HasMany {
+    public function boards() : HasMany {
         return $this->hasMany(Board::class);
     }
 }

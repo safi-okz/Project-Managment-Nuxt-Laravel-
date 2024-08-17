@@ -14,6 +14,8 @@ class Ticket extends Model
 {
     use HasFactory, HasUuids;
 
+    protected $guarded = [];
+
     public function board() : BelongsTo
     {
         return $this->belongsTo(Board::class);

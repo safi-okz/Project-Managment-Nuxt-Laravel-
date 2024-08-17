@@ -13,7 +13,7 @@ class BoardController extends Controller
 
         $data = $request->validated();
 
-        $board = $request->user()->boards()->create($data);
+        $board = Board::create($data);
 
         return new BoardResource($board);
     }

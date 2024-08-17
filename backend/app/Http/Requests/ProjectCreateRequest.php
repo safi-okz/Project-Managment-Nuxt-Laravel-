@@ -11,7 +11,7 @@ class ProjectCreateRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return $this->user();
+        return true;
     }
 
     /**
@@ -22,7 +22,8 @@ class ProjectCreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required', 'max:3', 'string']
+            'title' => ['required', 'min:3', 'string'],
+            'description' => ['required', 'min:3', 'string']
         ];
     }
 }

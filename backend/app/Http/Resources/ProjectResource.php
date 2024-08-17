@@ -17,7 +17,8 @@ class ProjectResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'title' => $this->tilte,
+            'title' => $this->title,
+            // 'description' => $this->description,
             'boards' =>  BoardResource::collection($this->whenLoaded('boards')),
             'created_at' => $this->created_at
         ];

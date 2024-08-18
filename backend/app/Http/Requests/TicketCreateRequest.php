@@ -24,7 +24,8 @@ class TicketCreateRequest extends FormRequest
         return [
             'title' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string', 'max:2000'],
-            'board_id' => ['required', 'string', 'exists:boards,id']
+            'board_id' => ['required', 'string', 'exists:boards,id'],
+            'ranke' => ['required', 'integer']
         ];
     }
 }

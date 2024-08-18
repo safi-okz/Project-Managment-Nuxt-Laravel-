@@ -26,9 +26,10 @@ class BoardController extends Controller
         return new BoardResource($board);
     }
 
-    public function destory(Board $board, Request $request)
+    public function destroy(Board $board, Request $request)
     {
-        abort_if($board->project->user_id !== $request->user->id, 'You are not allowed to delete this board');
+        $board->load("project");
+        abort_if($board->project->user_id !== $request->user()->id, 'You are not allowed to delete this board');
 
         $board->delete();
 

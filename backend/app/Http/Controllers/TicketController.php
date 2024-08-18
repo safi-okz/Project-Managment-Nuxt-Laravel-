@@ -14,14 +14,18 @@ class TicketController extends Controller
     {
         $data = $request->validated();
 
-        $ticket = Ticket::create($data);
+        $ticket = Ticket::create([
+            ...$data,
+            'creator_id' => $request->user()->id
+        ]);
 
         return new TicketResource($ticket);
     }
 
     public function show(Ticket $ticket)
     {
-        $ticket = Ticket::with('creator', 'members')->findOrFail($ticket);
+        // $ticket = Ticket::with('creator', 'members')->findOrFail($ticket);
+        $ticket->load('creator', 'members');
         return new TicketResource($ticket);
     }
 

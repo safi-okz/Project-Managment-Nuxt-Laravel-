@@ -18,9 +18,12 @@ class TicketResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->title,
+            'ranke' => $this->ranke,
             'description' => $this->description,
             'creator' => new UserResource($this->whenLoaded('creator')),
-            'members' => UserResource::collection($this->whenLoaded('members'))
+            'members' => UserResource::collection($this->whenLoaded('members')),
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at
         ];
     }
 }

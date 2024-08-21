@@ -5,7 +5,7 @@
 <template>
     <MetaTags title="Sign In" description="Sigin to your account" />
     <div>
-       <h1>Sign In</h1>
+       <AuthForm />
     </div>
 </template>
 

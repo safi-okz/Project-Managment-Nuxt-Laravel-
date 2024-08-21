@@ -3,8 +3,9 @@
 </script>
 
 <template>
+    <MetaTags title="Sign In" description="Sigin to your account" />
     <div>
-        <h1 class="bg-[#ff0000]">Welcome to the index page.</h1>
+       <h1>Sign In</h1>
     </div>
 </template>
 

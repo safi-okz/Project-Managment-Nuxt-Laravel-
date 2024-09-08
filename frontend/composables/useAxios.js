@@ -8,9 +8,19 @@ export default function useAxios() {
             headers: {
                 Accept: 'application/json',
                 "Content-Type": 'application/json',
-                Authorization: `Bearer ${localStorage.getItem('token')}`
+                // Authorization: `Bearer ${localStorage.getItem('token')}`
             },
             withCredentials: true,
-            withXSRFToken: true
+            withXSRFToken: true,
         });
+
+        async function csrf() {
+            const csrfToken = await api.get('/sanctum/csrf-cookie');
+            console.log('token csrffff ', csrfToken);
+            return csrfToken
+        }
+
+        return {
+            api, csrf
+        };
 }

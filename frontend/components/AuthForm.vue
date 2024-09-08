@@ -14,21 +14,29 @@
       </div>
   
       <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form class="space-y-6" action="#" method="POST">
+        <form class="space-y-6" @submit.prevent="handleSubmit">
 
           <FormGroup v-if="props.formType == 'signup'" label="Full name" name="name" type="text"
                     autocomplete="off" required labelFor="name"
+                    v-model="userForm.name" :errorMessage="errorBag.name"
                      />
 
-            <FormGroup label="Email Address" name="email" type="email" autocomplete="email" labelFor="email" required />
+            <FormGroup label="Email Address" name="email" type="email" autocomplete="email" labelFor="email" required
+                v-model="userForm.email" :errorMessage="errorBag.email"
+             />
   
             <div class="my-2">
-              <FormGroup label="Password" name="password" type="password" autocomplete="current-password" labelFor="password" required />
+              <FormGroup label="Password" name="password" type="password" autocomplete="current-password" labelFor="password" required
+                    v-model="userForm.password" :errorMessage="userForm.password"
+               />
 
               <FormGroup v-if="props.formType == 'signup'" label="Confirm Password" name="password_confirmation"
                         type="password" autocomplete="off" required
                          labelFor="password"
-                        class="my-2" />
+                        class="my-2"
+                        v-model="userForm.password_confirmation"
+                        :errorMessage="errorBag.password_confirmation"
+                         />
               <div class="text-sm text-end" v-else>
                   <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-500">Forgot password?</a>
               </div>
@@ -74,5 +82,22 @@ const props = defineProps({
     default: "signin",
     validator: prop => ['signin', 'signup'].includes(prop)
   }
+});
+
+const userForm = reactive({
+      name: '',
+      email: '',
+      password: '',
+      password_confirmation: ''  
 })
+
+const { login, register, errorBag } = useAuth()
+
+const handleSubmit = () => {
+  if(props.formType === 'signin'){
+    login(userForm)
+  } else if(props.formType === 'signup'){
+    register(userForm);
+  }
+}
 </script>

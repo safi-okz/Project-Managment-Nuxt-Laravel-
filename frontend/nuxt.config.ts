@@ -5,9 +5,9 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   css: ['~/assets/css/main.css'],
   runtimeConfig: {
-    API_URL: 'http://127.0.0.1:8000',
+    API_URL: 'http://localhost:8000',
     public: {
-          API_URL: 'http://127.0.0.1:8000',
+          API_URL: 'http://localhost:8000',
     }
   },
   postcss: {

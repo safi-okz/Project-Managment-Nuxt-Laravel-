@@ -6,12 +6,12 @@
 </template>
 
 <script setup>
-const { user, me } = useAuth();
 
 definePageMeta({
-    middleware: ['auth']
+  middleware: ['auth']
 })
 
+const { user} = useAuth();
 // onMounted(() => me());
 </script>
 

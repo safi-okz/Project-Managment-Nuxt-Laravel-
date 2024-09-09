@@ -27,7 +27,12 @@ export default function useAuth () {
                     console.log('data login ', data);
                     // Route Dashboard
                     user.value = data.user;
-                    navigateTo('/dashboard');
+                    $fetch('/api/set_cookie', {
+                        method: 'POST',
+                        body:{token: data.token}
+                    })
+                    .then(() => navigateTo('/dashboard'));
+                    // navigateTo('/dashboard');
                 }).catch(err => {
                     console.log('error login ', err.response)
                     transformValidationError(err.response)
@@ -36,7 +41,12 @@ export default function useAuth () {
     }
 
     function logout() {
-
+            api.post('/logout').then(() => {
+                user.value = null;
+                $fetch('/api/logout', {
+                    method: 'POST'
+                }).then(res => navigateTo('/'));
+            })
     }
 
     function register(userForm) {

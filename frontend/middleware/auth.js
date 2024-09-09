@@ -1,12 +1,14 @@
+import { useCookie } from 'nuxt/app';
+
 export default defineNuxtRouteMiddleware(async (to, from) => {
-   
-    const { user, me } = useAuth();
 
-    await me();
+    const key = process.server ? 'token' : 'XSRF-TOKEN'
+    // console.log('cookieeeeee ', useCookie());
+    const token = useCookie(key)
 
-    console.log('in auth middleware ', user.value);
+    console.log('token in auth middleware ', token);
 
-    if (!user.value) {
+    if (!token.value) {
       return navigateTo('/');
     }
   })

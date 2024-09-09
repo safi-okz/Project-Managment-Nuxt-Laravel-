@@ -91,7 +91,7 @@ const userForm = reactive({
       password_confirmation: ''  
 })
 
-const { login, register, errorBag } = useAuth()
+const { login, register, errorBag, user, me } = useAuth()
 
 const handleSubmit = () => {
   if(props.formType === 'signin'){

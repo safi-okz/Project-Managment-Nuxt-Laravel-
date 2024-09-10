@@ -13,7 +13,7 @@ defineProps({
     variant: {
         type: String,
         default: 'primary',
-        validator: prop => ['primary', 'secondary', 'bordered', 'danger', 'success'].includes(prop)
+        validator: prop => ['primary', 'secondary', 'bordered', 'danger', 'success', 'ghost'].includes(prop)
     }
 })
 </script>

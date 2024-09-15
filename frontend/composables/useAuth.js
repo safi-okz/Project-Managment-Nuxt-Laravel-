@@ -9,7 +9,7 @@ export default function useAuth () {
     //     name: ''
     // }));
 
-    const { errorBag, transformValidationError, resetErrorBag } = useError();
+    const { errorBag, transformValidationError, resetErrorBag } = useCustomError();
 
     const { api, csrf } = useAxios();
 

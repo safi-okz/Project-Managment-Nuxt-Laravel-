@@ -1,4 +1,4 @@
-export default function useError() {
+export default function useCustomError() {
     const errorBag = useState('error-bag', () => ({}));
 
     function transformValidationError(response, handlerType = 'axios') {
@@ -9,10 +9,11 @@ export default function useError() {
                     }
                 }
             }
+            console.log('errorr bag  ', errorBag.value);
     }
 
     function resetErrorBag() {
-        
+        errorBag.value = {};
     }
 
     return {

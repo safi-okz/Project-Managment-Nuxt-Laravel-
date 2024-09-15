@@ -1,6 +1,7 @@
 <template>
+  <MetaTags title="Projects List" description="all list of projects" />
   <div>
-    <h1>Projects</h1>
+    <ProjectAdd @add="handleProjectAddition" />
   </div>
 </template>
 
@@ -13,6 +14,10 @@ onMounted(async () => await projectsLoad());
 const projectsLoad = async () => {
       const response = await api.get('/api/projects');
       console.log('prjects response ', response);
+}
+
+const handleProjectAddition = () => {
+  
 }
 </script>
 

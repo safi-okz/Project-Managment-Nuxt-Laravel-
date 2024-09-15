@@ -20,7 +20,7 @@ defineProps({
 
 <style scoped>
 .layout {
-    @apply flex w-full justify-center rounded-md px-3 py-1.5 text-sm font-semibold leading-6 shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ease-in-out duration-150 transition-all
+    @apply flex justify-center rounded-md px-3 py-1.5 text-sm font-semibold leading-6 shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ease-in-out duration-150 transition-all
 }
 
 .primary {

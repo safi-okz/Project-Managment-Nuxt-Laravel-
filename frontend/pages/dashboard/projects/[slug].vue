@@ -8,8 +8,8 @@
     </div>
 
     <div class="w-full flex gap-2 overflow-x-auto">
-        <BoardStatic :project="project" @add="handleProjectBoard" v-if="showBoard"></BoardStatic>
-        <BoardDynamic v-for="board in project.boards" :key="board.id" :board="board" />
+        <BoardStatic :project="project" v-if="showBoard"></BoardStatic>
+        <BoardDynamicClient v-for="board in project.boards" :key="board.id" :board="board" />
     </div>
   </div>
 </template>
@@ -17,14 +17,12 @@
 <script setup>
 const route = useRoute();
 
-const project = ref();
+const { project } = useProject();
+
+// const project = ref();
 const showBoard = ref(false);
 
 const { api } = useAxios();
-
-const handleProjectBoard = (board) => {
-    return project.value.push(board);
-}
 
 onMounted(async () => {
    const response = await api.get(`/api/project/${route.params.slug}`);

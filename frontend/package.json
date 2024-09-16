@@ -14,7 +14,8 @@
     "@heroicons/vue": "^2.1.5",
     "axios": "^1.7.4",
     "nuxt": "^3.12.4",
-    "vue": "latest"
+    "vue": "latest",
+    "vuedraggable": "^4.1.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.20",

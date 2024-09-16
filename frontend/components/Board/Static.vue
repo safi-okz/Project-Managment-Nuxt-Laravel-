@@ -15,7 +15,7 @@ const props = defineProps({
     project: Object
 });
 
-const emit = defineEmits(['add']);
+const { project } = useProject();
 
 const { api } = useAxios();
 
@@ -32,7 +32,7 @@ const addBoard = async () => {
         try{
             const response = await api.post(`/api/board`, boradForm);
             console.log('response board done ', response);
-            emit('add', response.data.data);
+            project.value.board.push(response.data.data);
         } catch(error) {
             transformValidationError(error.response)
         }

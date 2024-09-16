@@ -1,6 +1,6 @@
 <template>
     <div>
-        <textarea v-if="type === 'textarea'" v-bind="$attrs"  class="input" cols="10" rows="6" ></textarea>
+        <textarea v-if="type === 'textarea'" v-bind="$attrs"  class="input" cols="10"  v-model="model" rows="6" ></textarea>
         <input 
                  v-else
                  v-bind="$attrs" 

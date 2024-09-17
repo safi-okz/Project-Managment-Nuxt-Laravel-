@@ -15,7 +15,7 @@
                         
                 >
                 <template #item="{ element }">
-                    <TicketDynamic :ticket="element" :data-board-id="props.board.id" />
+                    <TicketDynamic :ticket="element" />
                 </template>
             </Draggable>
         </div>
@@ -30,41 +30,69 @@ const props = defineProps({
     board: Object
 });
 
+const { api } = useAxios();
+
 const showTicketFrom = ref(false);
 
-// function handleChange(event) {
+function handleChange(event) {
 
 
 
-// if (event?.moved) {
+if (event?.moved) {
 
-//     const { element, newIndex, oldIndex } = event.moved
-
-
-//     updateTicket({
-//         ticketId: element.id,
-//         newIndex,
-//         oldIndex
-//     })
+    const { element, newIndex, oldIndex } = event.moved
 
 
-//     // this is when ticket is moved in the same board
-// }
+    updateTicket({
+        ticketId: element.id,
+        newIndex,
+        oldIndex
+    })
 
-// else if (event?.added) {
 
-//     const { element, newIndex, oldIndex } = event.added
+    // this is when ticket is moved in the same board
+}
+
+else if (event?.added) {
+
+    const { element, newIndex, oldIndex } = event.added
 
 
-//     updateTicket({
-//         ticketId: element.id,
-//         newIndex,
-//         oldIndex,
-//         boardToId: props.board.id
-//     })
-// }
+    updateTicket({
+        ticketId: element.id,
+        newIndex,
+        oldIndex,
+        boardToId: props.board.id
+    })
+}
 
-// }
+}
+
+function updateTicket(payload) {
+    let requiredTicket = props.board.tickets.find(t => t.id == payload.ticketId);
+
+    if (payload.boardToId) {
+        requiredTicket = {
+            ...requiredTicket,
+            board_id: payload.boardToId
+        };
+    }
+
+    requiredTicket = {
+        ...requiredTicket,
+        ranke: payload.newIndex + 1
+    };
+
+    console.log('Updating ticket with payload:', requiredTicket);
+
+    api.post(`/api/ticket/${payload.ticketId}/move`, requiredTicket)
+        .then(({data}) => {
+            console.log("Ticket updated successfully:", data);
+        })
+        .catch(err => {
+            console.log("Error updating ticket:", err.response.data);
+        });
+}
 
 // function updateTicket(payload) {
 
@@ -93,7 +121,7 @@ const showTicketFrom = ref(false);
 //     console.log("err",err.response.data)
 // })
 
-// }
+// }   
 </script>
 
 <style>

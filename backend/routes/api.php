@@ -35,6 +35,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::delete('/ticket/{ticket}', [TicketController::class, 'destroy']);
 
     Route::post('/ticket/{ticket}/assign', [TicketController::class, 'assign']);
+    Route::post("/ticket/{ticket}/move", [TicketController::class, 'move']);
 
 });
 // Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {

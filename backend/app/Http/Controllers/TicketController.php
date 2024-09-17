@@ -7,6 +7,7 @@ use App\Http\Resources\TicketResource;
 use Illuminate\Http\Request;
 use App\Models\Ticket;
 use App\Models\User;
+use App\TicketService;
 
 class TicketController extends Controller
 {
@@ -55,6 +56,18 @@ class TicketController extends Controller
         // Send email to those user who are not signed up
 
         $ticket->members()->sync($users->pluck('id'));
+
+        return new TicketResource($ticket);
+    }
+
+    public function move(Ticket $ticket, Request $request)
+    {
+        $data = $request->validate([
+            'board_id' => ['nullable', 'exists:boards,id'],
+            'ranke' => ['required', 'integer'],
+        ]);
+
+        $ticket = (new TicketService)->move($data, $ticket);
 
         return new TicketResource($ticket);
     }
